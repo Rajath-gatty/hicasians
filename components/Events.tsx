@@ -207,7 +207,7 @@ const Events: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Venue</p>
-                    <p className="text-sm font-bold text-gray-200 truncate" title="Glendale International School, Dubai">
+                    <p className="text-sm font-bold text-gray-200 text-wrap" title="Glendale International School, Dubai">
                       Glendale School, DXB
                     </p>
                   </div>
