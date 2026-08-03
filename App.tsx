@@ -7,6 +7,7 @@ import Sponsors from './components/Sponsors';
 import Gallery from './components/Gallery';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import heroImg from './src/assets/images/hero.jpeg';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-0"></div>
       <div
         className="absolute top-0 left-0 w-full h-[120vh] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/src/assets/images/hero.jpeg')" }}
+        style={{ backgroundImage: `url(${heroImg})` }}
       ></div>
 
       <div className="relative z-10">
