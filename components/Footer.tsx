@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-black/50 backdrop-blur-sm border-t border-gray-800/50 py-8">
+    <footer className="bg-black/50 backdrop-blur-sm border-t border-gray-800/50 py-8 pb-28 md:pb-8">
       <div className="container mx-auto px-6 text-center text-gray-400">
         <p>&copy; {new Date().getFullYear()} Hicasians UAE. All Rights Reserved.</p>
         <p className="text-sm mt-2">A community for the alumni of Hindustan College of Arts and Science in the UAE.</p>

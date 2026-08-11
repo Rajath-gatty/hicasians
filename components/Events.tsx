@@ -222,7 +222,7 @@ const Events: React.FC = () => {
                 className="flex-1 sm:flex-initial flex items-center justify-center gap-2 bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-bold py-4 px-8 rounded-xl shadow-lg shadow-orange-500/10 hover:shadow-orange-500/25 hover:from-orange-400 hover:to-yellow-400 transform hover:-translate-y-0.5 transition-all duration-300"
               >
                 <Ticket className="w-5 h-5 text-black fill-black/10" />
-                Get Tickets Now
+                Book your spot
                 <ArrowRight className="w-4 h-4 text-black" />
               </button>
 

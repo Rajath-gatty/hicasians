@@ -31,9 +31,34 @@ const allSponsors: SponsorItem[] = Object.entries(logoModules)
     };
   });
 
-const ITEMS_PER_SLIDE = 12;
+// 8 logos per slide on mobile (2 cols x 4 rows), 12 from `sm` up (4 cols x 3 rows)
+const MOBILE_ITEMS_PER_SLIDE = 8;
+const DESKTOP_ITEMS_PER_SLIDE = 12;
+const DESKTOP_QUERY = '(min-width: 640px)';
+
+const useItemsPerSlide = (): number => {
+  const [itemsPerSlide, setItemsPerSlide] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia(DESKTOP_QUERY).matches
+      ? DESKTOP_ITEMS_PER_SLIDE
+      : MOBILE_ITEMS_PER_SLIDE
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DESKTOP_QUERY);
+    const sync = (matches: boolean) =>
+      setItemsPerSlide(matches ? DESKTOP_ITEMS_PER_SLIDE : MOBILE_ITEMS_PER_SLIDE);
+
+    sync(mediaQuery.matches);
+    const handleChange = (event: MediaQueryListEvent) => sync(event.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  return itemsPerSlide;
+};
 
 const Sponsors: React.FC = () => {
+  const itemsPerSlide = useItemsPerSlide();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<number>(1);
   const [isPaused, setIsPaused] = useState(false);
@@ -77,8 +102,13 @@ const Sponsors: React.FC = () => {
     }, 300);
   };
 
-  // Group items into slides of 12 items each (4x3 grid)
-  const totalSlides = Math.ceil(allSponsors.length / ITEMS_PER_SLIDE);
+  // Group items into slides (12 per slide on desktop, 8 on mobile)
+  const totalSlides = Math.ceil(allSponsors.length / itemsPerSlide);
+
+  // Keep the active slide valid when the slide size changes on resize
+  useEffect(() => {
+    if (currentIndex > totalSlides - 1) setCurrentIndex(0);
+  }, [currentIndex, totalSlides]);
 
   const nextSlide = () => {
     setDirection(1);
@@ -108,8 +138,8 @@ const Sponsors: React.FC = () => {
 
   // Current items slice for active slide
   const currentSlideItems = allSponsors.slice(
-    currentIndex * ITEMS_PER_SLIDE,
-    (currentIndex + 1) * ITEMS_PER_SLIDE
+    currentIndex * itemsPerSlide,
+    (currentIndex + 1) * itemsPerSlide
   );
 
   const slideVariants = {
@@ -197,7 +227,7 @@ const Sponsors: React.FC = () => {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          {/* Carousel Slide Area (12 items per slide in 4x3 grid) */}
+          {/* Carousel Slide Area (8 items per slide on mobile, 12 from sm up) */}
           <div className="overflow-hidden min-h-[320px] sm:min-h-[360px] px-1 py-2">
             <AnimatePresence initial={false} custom={direction} mode="wait">
               <motion.div

@@ -3,8 +3,12 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import AboutSummary from './components/AboutSummary';
 import Events from './components/Events';
+import UnityStrength from './components/UnityStrength';
 import Sponsors from './components/Sponsors';
 import Gallery from './components/Gallery';
+import SocialInitiatives from './components/SocialInitiatives';
+import Legacy from './components/Legacy';
+import ConfettiTransition from './components/ConfettiTransition';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import heroImg from './src/assets/images/hero.jpeg';
@@ -18,6 +22,9 @@ const App: React.FC = () => {
         style={{ backgroundImage: `url(${heroImg})` }}
       ></div>
 
+      {/* Mobile only: darken the hero background image for text legibility */}
+      <div className="md:hidden absolute top-0 left-0 w-full h-[120vh] bg-black/60 pointer-events-none"></div>
+
       <div className="relative z-10">
         <Header />
         <main>
@@ -25,11 +32,31 @@ const App: React.FC = () => {
           <AboutSummary />
           <Events />
 
-          {/* Subtle light background gradient section: Our Sponsors through Events Gallery */}
-          <div style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 60%, #FFDBCD 100%)' }}>
+          {/* Light sections: sponsors through the legacy story */}
+          <div className="bg-white">
             <Sponsors />
+            <UnityStrength />
+            <SocialInitiatives />
+            <Legacy />
+          </div>
+
+          {/* Peach gallery band, blended into the white above with a diagonal + confetti */}
+          {/* Peach gallery band, blended into the white above with a diagonal + confetti.
+              The peach fade is a fixed 720px tall so it resolves to white just below the
+              gallery heading instead of stretching across the whole photo grid. */}
+          <div
+            className="relative pt-16 md:pt-24"
+            style={{
+              backgroundColor: '#FFFFFF',
+              backgroundImage: 'linear-gradient(180deg, #FFDBCD 0%, #FFEFE8 55%, #FFFFFF 100%)',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '100% 720px',
+            }}
+          >
+            <ConfettiTransition />
             <Gallery />
           </div>
+
 
           <Contact />
         </main>
