@@ -378,7 +378,7 @@ const Events: React.FC = () => {
                       type="submit"
                       className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 text-black font-extrabold py-4 px-6 rounded-xl hover:from-orange-400 hover:to-yellow-400 shadow-lg shadow-orange-500/10 transition-all duration-300 flex items-center justify-center gap-2"
                     >
-                      Confirm and Book Tickets
+                      Book Your Spot
                     </button>
                   </form>
                 ) : (

@@ -57,7 +57,7 @@ const PromotersCarousel: React.FC = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <h3 className="shrink-0 text-lg md:text-xl font-bold text-white mb-6 text-center">Our Promoters</h3>
+      <h3 className="shrink-0 text-lg md:text-xl font-bold text-white mb-6 text-center">Our Partners</h3>
 
       <div className="flex-1 min-h-0 w-full flex items-center justify-center">
         {/* Mobile / tablet: peeking poster carousel */}
@@ -91,11 +91,10 @@ const PromotersCarousel: React.FC = () => {
                     onClick={() => goTo(index)}
                     aria-label={`Show promoter image ${index + 1}`}
                     aria-current={isActive}
-                    className={`block w-full aspect-[3/4] rounded-xl overflow-hidden border shadow-2xl bg-gray-900 cursor-pointer transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/60 ${
-                      isActive
+                    className={`block w-full aspect-[3/4] rounded-xl overflow-hidden border shadow-2xl bg-gray-900 cursor-pointer transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/60 ${isActive
                         ? 'border-gray-700/50 opacity-100 scale-100'
                         : 'border-gray-800/50 opacity-50 scale-90'
-                    }`}
+                      }`}
                   >
                     <img
                       src={promoter.image}
@@ -139,9 +138,8 @@ const PromotersCarousel: React.FC = () => {
                 onClick={() => goTo(index)}
                 aria-label={`Show promoter image ${index + 1}`}
                 aria-current={isActive}
-                className={`h-2.5 rounded-full cursor-pointer transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/60 ${
-                  isActive ? 'w-6 bg-white' : 'w-2.5 bg-gray-600 hover:bg-gray-400'
-                }`}
+                className={`h-2.5 rounded-full cursor-pointer transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/60 ${isActive ? 'w-6 bg-white' : 'w-2.5 bg-gray-600 hover:bg-gray-400'
+                  }`}
               />
             );
           })}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import alumniGroupImg from '../src/assets/images/unity.png';
+import alumniGroupImg from '../src/assets/images/unity.jpg';
 
 interface Stat {
   value: string;

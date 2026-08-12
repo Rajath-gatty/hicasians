@@ -53,13 +53,13 @@ const Header: React.FC = () => {
         <a
           href="#home"
           aria-label="HICASIANS UAE - Home"
-          className={`md:hidden fixed z-50 transition-all duration-700 ease-out ${isScrolled ? 'top-3 left-6' : 'top-[13vh] left-1/2 -translate-x-1/2'
+          className={`md:hidden fixed z-50 transition-all duration-700 ease-out ${isScrolled ? 'top-3 left-6' : 'top-[27vh] left-1/2 -translate-x-1/2'
             }`}
         >
           <img
             src={logoImg}
             alt="HICASIANS UAE"
-            className={`w-auto object-contain transition-all duration-700 ease-out ${isScrolled ? 'h-12' : 'h-24 drop-shadow-[0_6px_20px_rgba(0,0,0,0.65)]'
+            className={`w-auto object-contain transition-all duration-700 ease-out ${isScrolled ? 'h-12' : 'h-28 drop-shadow-[0_6px_20px_rgba(0,0,0,0.65)]'
               }`}
           />
         </a>

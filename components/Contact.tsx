@@ -48,7 +48,7 @@ const Contact: React.FC = () => {
               <div className="ml-4">
                 <h3 className="text-xl font-semibold text-white">Email Us</h3>
                 <p className="text-gray-400 text-sm mt-1">For all inquiries, please email our committee.</p>
-                <a href="mailto:info@hicasiansuae.com" className="text-orange-400 hover:text-orange-300 font-medium transition-colors duration-300 inline-block mt-2">hello@hicasiansuae.com</a>
+                <a href="mailto:info@hicasiansuae.com" className="text-orange-400 hover:text-orange-300 font-medium transition-colors duration-300 inline-block mt-2">hello@hicasians.com</a>
               </div>
             </div>
             <div className="flex items-start bg-gray-900/90 backdrop-blur-md p-6 rounded-2xl border border-gray-800 shadow-xl">
