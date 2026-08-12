@@ -11,20 +11,26 @@ import Legacy from './components/Legacy';
 import ConfettiTransition from './components/ConfettiTransition';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-// import heroImg from './src/assets/images/hero.jpeg';
 import heroImg from './src/assets/images/hero-thumbnail.jpg';
+import heroVideo from './src/assets/videos/event-video.mp4';
 
 const App: React.FC = () => {
   return (
-    <div className="bg-black text-gray-100 min-h-screen">
-      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-0"></div>
-      <div
-        className="absolute top-0 left-0 w-full h-[120vh] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImg})` }}
-      ></div>
+    <div className="relative min-h-screen bg-black text-gray-100">
+      <video
+        className="absolute inset-x-0 top-0 h-[120vh] w-full object-cover object-center"
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster={heroImg}
+        aria-hidden="true"
+      >
+        <source src={heroVideo} type="video/mp4" />
+      </video>
 
-      {/* Mobile only: darken the hero background image for text legibility */}
-      <div className="md:hidden absolute top-0 left-0 w-full h-[120vh] bg-black/60 pointer-events-none"></div>
+      {/* Ensures header and hero copy remain legible over the video. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[120vh] bg-black/60 md:bg-black/50" />
 
       <div className="relative z-10">
         <Header />

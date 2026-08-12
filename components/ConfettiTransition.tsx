@@ -72,13 +72,21 @@ const shapeFor = (piece: Piece) => {
   }
 };
 
-const ConfettiPiece: React.FC<{ piece: Piece; progress: MotionValue<number>; parallax: boolean }> = ({
+const ConfettiPiece: React.FC<{
+  piece: Piece;
+  progress: MotionValue<number>;
+  parallax: boolean;
+  parallaxStrength: number;
+  isMobile: boolean;
+}> = ({
   piece,
   progress,
   parallax,
+  parallaxStrength,
+  isMobile,
 }) => {
-  const drift = piece.speed * 220;
-  const spin = piece.speed * 24;
+  const drift = piece.speed * 220 * parallaxStrength;
+  const spin = piece.speed * 24 * parallaxStrength;
   const y = useTransform(progress, [0, 1], parallax ? [drift, -drift] : [0, 0]);
   const rotate = useTransform(
     progress,
@@ -86,9 +94,13 @@ const ConfettiPiece: React.FC<{ piece: Piece; progress: MotionValue<number>; par
     parallax ? [piece.rotate - spin, piece.rotate + spin] : [piece.rotate, piece.rotate]
   );
 
+  if ((isMobile && piece.hideOnMobile) || (!isMobile && piece.showOnMobileOnly)) {
+    return null;
+  }
+
   return (
     <motion.svg
-      className={`absolute ${piece.hideOnMobile ? 'hidden md:block' : piece.showOnMobileOnly ? 'md:hidden' : ''}`}
+      className="absolute"
       style={{
         left: piece.left,
         top: piece.top,
@@ -110,7 +122,9 @@ const ConfettiPiece: React.FC<{ piece: Piece; progress: MotionValue<number>; par
 const ConfettiTransition: React.FC = () => {
   const bandRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches
+  );
 
   useEffect(() => {
     const mobileQuery = window.matchMedia('(max-width: 767px)');
@@ -146,7 +160,9 @@ const ConfettiTransition: React.FC = () => {
             key={index}
             piece={piece}
             progress={scrollYProgress}
-            parallax={isMobile && !prefersReducedMotion}
+            parallax={!prefersReducedMotion}
+            parallaxStrength={isMobile ? 1 : 1.3}
+            isMobile={isMobile}
           />
         ))}
       </div>
