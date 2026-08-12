@@ -266,7 +266,7 @@ const Events: React.FC = () => {
                     <Ticket className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-white text-lg">Event Booking</h4>
+                    <h4 className="font-bold text-white text-lg">Book Your Spot</h4>
                     <p className="text-xs text-gray-400">Aarattu 2026 • Oct 18</p>
                   </div>
                 </div>

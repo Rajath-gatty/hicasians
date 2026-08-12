@@ -11,7 +11,8 @@ import Legacy from './components/Legacy';
 import ConfettiTransition from './components/ConfettiTransition';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import heroImg from './src/assets/images/hero.jpeg';
+// import heroImg from './src/assets/images/hero.jpeg';
+import heroImg from './src/assets/images/hero-thumbnail.jpg';
 
 const App: React.FC = () => {
   return (

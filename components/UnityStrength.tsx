@@ -28,9 +28,10 @@ const UnityStrength: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-[1.35]">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight leading-[150%]">
               Unity is
-              <br />
+            </h2>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight  md:mt-3 leading-[150%]">
               Our Strength
             </h2>
             <p className="text-gray-600 mt-5 text-[13px] md:text-sm leading-relaxed max-w-sm">

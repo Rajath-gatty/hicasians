@@ -4,10 +4,10 @@ import logoImg from '../src/assets/images/Logo.png';
 
 const navLinks = [
   { name: 'Home', short: 'Home', href: '#home', id: 'home', Icon: House },
-  { name: 'About', short: 'About', href: '#about', id: 'about', Icon: Users },
   { name: 'Upcoming Events', short: 'Events', href: '#events', id: 'events', Icon: Sparkles },
+  { name: 'About', short: 'About', href: '#unity', id: 'unity', Icon: Users },
   { name: 'Event Gallery', short: 'Gallery', href: '#gallery', id: 'gallery', Icon: Images },
-  { name: 'Contacts', short: 'Contact', href: '#contact', id: 'contact', Icon: Contact },
+  { name: 'Contact', short: 'Contact', href: '#contact', id: 'contact', Icon: Contact },
 ];
 
 const Header: React.FC = () => {
@@ -18,7 +18,8 @@ const Header: React.FC = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -45,34 +46,39 @@ const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 md:bg-black/90 md:backdrop-blur-md md:shadow-lg ${
-          isScrolled ? 'bg-black/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 md:bg-black/90 md:backdrop-blur-md md:shadow-lg ${isScrolled ? 'bg-black/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+          }`}
       >
         {/* Mobile logo: starts inside the hero and travels up into the bar on scroll */}
         <a
           href="#home"
           aria-label="HICASIANS UAE - Home"
-          className={`md:hidden fixed z-50 transition-all duration-700 ease-out ${
-            isScrolled ? 'top-3 left-6' : 'top-[13vh] left-1/2 -translate-x-1/2'
-          }`}
+          className={`md:hidden fixed z-50 transition-all duration-700 ease-out ${isScrolled ? 'top-3 left-6' : 'top-[13vh] left-1/2 -translate-x-1/2'
+            }`}
         >
           <img
             src={logoImg}
             alt="HICASIANS UAE"
-            className={`w-auto object-contain transition-all duration-700 ease-out ${
-              isScrolled ? 'h-12' : 'h-24 drop-shadow-[0_6px_20px_rgba(0,0,0,0.65)]'
-            }`}
+            className={`w-auto object-contain transition-all duration-700 ease-out ${isScrolled ? 'h-12' : 'h-24 drop-shadow-[0_6px_20px_rgba(0,0,0,0.65)]'
+              }`}
           />
         </a>
 
-        <div className="container mx-auto px-6 py-3 hidden md:flex justify-between items-center">
+        <div
+          className={`container mx-auto px-6 hidden md:flex justify-between items-center transition-all duration-300 ${isScrolled ? 'py-2 lg:py-2' : 'py-3 lg:py-4'
+            }`}
+        >
           <a href="#home" className="flex items-center">
-            <img src={logoImg} alt="HICASIANS UAE" className="h-16 lg:h-20 w-auto object-contain transition-all duration-300" />
+            <img
+              src={logoImg}
+              alt="HICASIANS UAE"
+              className={`w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-14 lg:h-16' : 'h-16 lg:h-20'
+                }`}
+            />
           </a>
 
           {/* Desktop Nav */}
-          <nav className="flex space-x-8">
+          <nav className={`flex space-x-8 transition-all duration-300 ${isScrolled ? 'text-sm' : 'text-base'}`}>
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -100,9 +106,8 @@ const Header: React.FC = () => {
                 <a
                   href={href}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`flex flex-col items-center gap-1 py-2 rounded-2xl transition-colors duration-300 ${
-                    isActive ? 'text-orange-400 bg-orange-500/10' : 'text-gray-400 hover:text-white'
-                  }`}
+                  className={`flex flex-col items-center gap-1 py-2 rounded-2xl transition-colors duration-300 ${isActive ? 'text-orange-400 bg-orange-500/10' : 'text-gray-400 hover:text-white'
+                    }`}
                 >
                   <Icon className="w-5 h-5" strokeWidth={1.75} />
                   <span className="text-[11px] font-medium leading-none">{short}</span>
