@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
@@ -168,74 +169,77 @@ const Gallery: React.FC = () => {
         </div>
       </div>
 
-      {/* Unified lightbox modal */}
-      <AnimatePresence>
-        {isOpen && currentImage && currentAlbum && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            role="dialog"
-            aria-modal="true"
-            aria-label={currentAlbum.title}
-          >
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeLightbox}
-              className="absolute inset-0 bg-black/90 backdrop-blur-md"
-            />
-
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="relative z-10 w-full max-w-4xl"
+      {/* Unified lightbox modal — portalled to body to escape stacking contexts */}
+      {createPortal(
+        <AnimatePresence>
+          {isOpen && currentImage && currentAlbum && (
+            <div
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+              role="dialog"
+              aria-modal="true"
+              aria-label={currentAlbum.title}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div>
-                  <h3 className="text-white font-bold text-lg">{currentAlbum.title}</h3>
-                  <p className="text-gray-400 text-xs">
-                    {imagePositionInAlbum.current} / {imagePositionInAlbum.total}
-                  </p>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={closeLightbox}
+                className="absolute inset-0 bg-black/90 backdrop-blur-md"
+              />
+
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                className="relative z-10 w-full max-w-4xl"
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <h3 className="text-white font-bold text-lg">{currentAlbum.title}</h3>
+                    <p className="text-gray-400 text-xs">
+                      {imagePositionInAlbum.current} / {imagePositionInAlbum.total}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={closeLightbox}
+                    aria-label="Close"
+                    className="w-9 h-9 rounded-lg border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={closeLightbox}
-                  aria-label="Close"
-                  className="w-9 h-9 rounded-lg border border-gray-700 text-gray-300 hover:text-white hover:border-gray-500 flex items-center justify-center transition-colors cursor-pointer"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
 
-              <div className="relative">
-                <img
-                  src={currentImage.src}
-                  alt={`${currentAlbum.title} photo ${imagePositionInAlbum.current}`}
-                  className="w-full max-h-[75vh] object-contain rounded-2xl border border-gray-800 bg-black"
-                />
+                <div className="relative">
+                  <img
+                    src={currentImage.src}
+                    alt={`${currentAlbum.title} photo ${imagePositionInAlbum.current}`}
+                    className="w-full max-h-[75vh] object-contain rounded-2xl border border-gray-800 bg-black"
+                  />
 
-                <button
-                  type="button"
-                  onClick={goPrev}
-                  aria-label="Previous photo"
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 text-white hover:bg-black/80 flex items-center justify-center transition-colors cursor-pointer"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  type="button"
-                  onClick={goNext}
-                  aria-label="Next photo"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 text-white hover:bg-black/80 flex items-center justify-center transition-colors cursor-pointer"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                  <button
+                    type="button"
+                    onClick={goPrev}
+                    aria-label="Previous photo"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 text-white hover:bg-black/80 flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={goNext}
+                    aria-label="Next photo"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-black/60 border border-white/20 text-white hover:bg-black/80 flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 };
