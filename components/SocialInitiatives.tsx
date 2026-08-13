@@ -68,7 +68,7 @@ const SocialInitiatives: React.FC = () => {
 
               {/* Caption overlay */}
               <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-black/85 via-black/50 to-transparent pointer-events-none">
-                <h3 className="text-white font-bold text-base">Charity Initiatives</h3>
+                <h3 className="text-white font-bold text-base">Together We Give.</h3>
                 <p className="text-gray-200 text-sm mt-1">Giving back to the community together.</p>
                 {galleryImages.length > 0 && (
                   <button

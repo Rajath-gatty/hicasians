@@ -53,7 +53,7 @@ const Header: React.FC = () => {
         <a
           href="#home"
           aria-label="HICASIANS UAE - Home"
-          className={`md:hidden fixed z-50 transition-all duration-700 ease-out ${isScrolled ? 'top-3 left-6' : 'top-[27vh] left-1/2 -translate-x-1/2'
+          className={`md:hidden fixed z-50 transition-all duration-[1500ms] ease-out ${isScrolled ? 'top-3 left-6' : 'top-[27vh] left-1/2 -translate-x-1/2'
             }`}
         >
           <img

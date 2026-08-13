@@ -12,11 +12,11 @@ const Hero: React.FC = () => {
           HICASIAN's UAE
           <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-500">
-            welcomes you all
+            Welcomes You All
           </span>
         </h1>
         <p className="text-lg md:text-xl text-gray-200 w-fit mx-auto mb-8 animate-fade-in-up font-medium md:bg-black/60 md:backdrop-blur-md md:border md:border-white/15 md:px-6 md:py-3 md:rounded-full md:shadow-lg">
-          Our own Onam celebration with our alumni.
+          This Onam, Lets Aarattu!
         </p>
         <a
           href="#events"

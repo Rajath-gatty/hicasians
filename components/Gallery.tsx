@@ -84,6 +84,7 @@ albums.forEach((album, albumIndex) => {
 const Gallery: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentFlatIndex, setCurrentFlatIndex] = useState(0);
+  const [isImageLoading, setIsImageLoading] = useState(true);
 
   const currentImage = flatImages[currentFlatIndex];
   const currentAlbum = currentImage ? albums[currentImage.albumIndex] : null;
@@ -94,6 +95,11 @@ const Gallery: React.FC = () => {
     const album = albums[currentImage.albumIndex];
     const indexInAlbum = album.images.indexOf(currentImage.src);
     return { current: indexInAlbum + 1, total: album.images.length };
+  }, [currentFlatIndex]);
+
+  // Reset loading state when image changes
+  useEffect(() => {
+    setIsImageLoading(true);
   }, [currentFlatIndex]);
 
   const closeLightbox = useCallback(() => setIsOpen(false), []);
@@ -211,10 +217,20 @@ const Gallery: React.FC = () => {
                 </div>
 
                 <div className="relative">
+                  {/* Skeleton loader */}
+                  {isImageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center rounded-2xl border border-gray-800 bg-gray-900 overflow-hidden">
+                      <div className="w-full h-full min-h-[50vh] animate-pulse">
+                        <div className="w-full h-full bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]" />
+                      </div>
+                    </div>
+                  )}
+
                   <img
                     src={currentImage.src}
                     alt={`${currentAlbum.title} photo ${imagePositionInAlbum.current}`}
-                    className="w-full max-h-[75vh] object-contain rounded-2xl border border-gray-800 bg-black"
+                    onLoad={() => setIsImageLoading(false)}
+                    className={`w-full max-h-[75vh] object-contain rounded-2xl border border-gray-800 bg-black transition-opacity duration-300 ${isImageLoading ? 'opacity-0' : 'opacity-100'}`}
                   />
 
                   <button

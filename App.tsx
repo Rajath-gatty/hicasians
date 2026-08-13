@@ -12,7 +12,7 @@ import ConfettiTransition from './components/ConfettiTransition';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import heroImg from './src/assets/images/hero-thumbnail.jpg';
-import heroVideo from './src/assets/videos/event-video.mp4';
+import heroVideo from './src/assets/videos/event-banner-video.mp4';
 
 const App: React.FC = () => {
   return (

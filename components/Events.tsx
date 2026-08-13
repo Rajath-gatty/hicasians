@@ -98,7 +98,7 @@ const Events: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-5xl font-extrabold text-white tracking-tight"
           >
-            Upcoming Celebrations
+            Celebrate The Spirit of Onam
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -107,7 +107,7 @@ const Events: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-gray-400 mt-4 max-w-2xl mx-auto text-base md:text-lg"
           >
-            Join your fellow alumni in celebrating the spirit, unity, and culture that binds us together.
+            A vibrant celebration of tradition, togetherness, and unforgettable moments.
           </motion.p>
         </div>
 
@@ -348,11 +348,12 @@ const Events: React.FC = () => {
                       </div>
                       <div>
                         <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1.5">
-                          HCAS Alumni Batch
+                          HCAS Alumni Batch <span className="text-orange-500">*</span>
                         </label>
                         <input
                           type="text"
                           name="batch"
+                          required
                           placeholder="e.g. 2015 - 2018"
                           value={formData.batch}
                           onChange={handleInputChange}
