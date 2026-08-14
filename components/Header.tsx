@@ -45,25 +45,10 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 md:bg-black/90 md:backdrop-blur-md md:shadow-lg ${isScrolled ? 'bg-black/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
-          }`}
-      >
-        {/* Mobile logo: starts inside the hero and travels up into the bar on scroll */}
-        <a
-          href="#home"
-          aria-label="HICASIANS UAE - Home"
-          className={`md:hidden fixed z-50 transition-all duration-[1500ms] ease-out ${isScrolled ? 'top-3 left-6' : 'top-[27vh] left-1/2 -translate-x-1/2'
-            }`}
-        >
-          <img
-            src={logoImg}
-            alt="HICASIANS UAE"
-            className={`w-auto object-contain transition-all duration-700 ease-out ${isScrolled ? 'h-12' : 'h-28 drop-shadow-[0_6px_20px_rgba(0,0,0,0.65)]'
-              }`}
-          />
-        </a>
-
+      {/* Bar is desktop-only. On mobile the logo floats free over the content, so the
+          header stays transparent and collapses to zero height — a full-width fixed
+          box here would otherwise swallow taps across the top of the hero. */}
+      <header className="fixed top-0 left-0 w-full z-40 transition-all duration-300 bg-transparent md:bg-black/90 md:backdrop-blur-md md:shadow-lg">
         <div
           className={`container mx-auto px-6 hidden md:flex justify-between items-center transition-all duration-300 ${isScrolled ? 'py-2 lg:py-2' : 'py-3 lg:py-4'
             }`}
@@ -93,10 +78,43 @@ const Header: React.FC = () => {
         </div>
       </header>
 
+      {/*
+        Mobile logo: starts inside the hero and travels up to the top-left on scroll.
+        Deliberately a sibling of <header>, not a child — the header carries a
+        backdrop-filter, which makes it the containing block for any fixed descendant,
+        and iOS Safari then rasterises that descendant into the filtered layer and
+        mispositions it on scroll. Motion is transform-only so it stays on the
+        compositor; animating top/left instead only repaints at scroll-end on iOS.
+        svh, not vh: vh on iOS is the toolbar-collapsed height, so it drifts as the
+        toolbar expands on scroll-up. svh is stable for the whole gesture.
+      */}
+      <a
+        href="#home"
+        aria-label="HICASIANS UAE - Home"
+        className="md:hidden fixed top-3 left-1/2 z-50 will-change-transform"
+        style={{
+          transform: isScrolled
+            ? 'translate3d(calc(1.5rem - 50vw), 0px, 0px)'
+            : 'translate3d(-50%, calc(27svh - 0.75rem), 0px)',
+          transition: 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        <img
+          src={logoImg}
+          alt="HICASIANS UAE"
+          className={`h-12 w-auto object-contain origin-top ${isScrolled ? '' : 'drop-shadow-[0_6px_20px_rgba(0,0,0,0.65)]'
+            }`}
+          style={{
+            transform: isScrolled ? 'scale(1)' : 'scale(2.3333)',
+            transition: 'transform 700ms cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        />
+      </a>
+
       {/* Mobile: floating bottom navigation */}
       <nav
         aria-label="Main navigation"
-        className="md:hidden fixed bottom-3 left-3 right-3 z-50 rounded-3xl bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50 pb-[env(safe-area-inset-bottom)]"
+        className="md:hidden fixed bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-[max(0.75rem,env(safe-area-inset-left))] right-[max(0.75rem,env(safe-area-inset-right))] z-50 rounded-3xl bg-black/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/50"
       >
         <ul className="flex items-stretch justify-between px-2 py-2">
           {navLinks.map(({ short, href, id, Icon }) => {
