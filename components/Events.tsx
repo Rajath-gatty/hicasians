@@ -171,7 +171,7 @@ const Events: React.FC = () => {
                 Aarattu 2026
               </h3>
               <p className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-500 mb-6">
-                Our own Onam celebration with our folks.
+                Onam celebration with our folks.
               </p>
 
               {/* Event Detailed Description */}
