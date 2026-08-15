@@ -190,7 +190,7 @@ const Sponsors: React.FC = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight"
           >
-            Our Sponsors
+            Our Partners
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}

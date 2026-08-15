@@ -22,7 +22,7 @@ const albumConfig = [
   { title: 'Aarattu 2025', folder: 'aarattu-2025' },
   { title: 'Aarattu 2024', folder: 'aarattu-2024' },
   { title: 'Kalikkalam', folder: 'kalikkalam' },
-  { title: 'Charity Initiatives', folder: 'charity-initiatives' },
+  { title: 'Social Initiatives', folder: 'charity-initiatives' },
   { title: 'Aarattu 2023', folder: 'aarattu-2023' },
   { title: 'Ifthar', folder: 'ifthar' },
 ];
