@@ -9,7 +9,7 @@ const Hero: React.FC = () => {
           className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4 animate-fade-in-down"
           style={{ filter: 'drop-shadow(0px 4px 16px rgba(0, 0, 0, 0.65)) drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4))' }}
         >
-          HICASIAN UAE
+          HICASIANS UAE
           <br />
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-yellow-500">
             Welcomes You All
